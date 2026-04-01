@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maison Noura — Salão & Barbearia</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #fafaf8;
+    --black: #0f0f0f;
+    --stone: #9c8e82;
+    --beige: #e8e0d5;
+    --accent: #b8956a;
+    --light: #f2ede8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+  }
+
+  /* NAVBAR */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 28px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--white);
+    border-bottom: 1px solid var(--beige);
+    transition: padding 0.4s ease;
+  }
+  nav.compact { padding: 18px 60px; }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    color: var(--black);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-center {
+    display: flex;
+    gap: 48px;
+  }
+  .nav-center a {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--stone);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-center a:hover { color: var(--black); }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .nav-phone {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--stone);
+    letter-spacing: 1px;
+  }
+  .nav-book {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--black);
+    padding: 12px 28px;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  .nav-book:hover { background: var(--accent); }
+
+  /* HERO */
+  .hero {
+    padding-top: 90px;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px;
+    position: relative;
+  }
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 1px; height: 100%;
+    background: var(--beige);
+  }
+
+  .hero-tag {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(60px, 7vw, 100px);
+    font-weight: 300;
+    line-height: 0.95;
+    color: var(--black);
+    margin-bottom: 40px;
+  }
+  .hero-title em {
+    font-style: italic;
+    font-weight: 300;
+    display: block;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--stone);
+    max-width: 380px;
+    margin-bottom: 48px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .btn-dark {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--black);
+    padding: 16px 36px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .btn-dark:hover { background: var(--accent); }
+  .btn-outline {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--black);
+    border: 1px solid var(--beige);
+    padding: 16px 36px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .btn-outline:hover { border-color: var(--black); }
+
+  .hero-right {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+  }
+  .hero-img-top {
+    background: var(--beige);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-img-top::before {
+    content: '✂';
+    font-size: 120px;
+    color: var(--stone);
+    opacity: 0.2;
+    animation: rotate-slow 20s linear infinite;
+  }
+  @keyframes rotate-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .hero-img-top .overlay-text {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--stone);
+    letter-spacing: 1px;
+  }
+
+  .hero-img-bottom {
+    background: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 48px;
+  }
+  .hero-stat {
+    text-align: center;
+  }
+  .hero-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: rgba(250,250,248,0.4);
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+  .stat-divider {
+    width: 1px;
+    height: 60px;
+    background: rgba(250,250,248,0.1);
+  }
+
+  /* SERVICES */
+  .services {
+    padding: 140px 60px;
+    background: var(--white);
+  }
+  .services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 80px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--beige);
+  }
+  .section-eyebrow {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .section-title-lg {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--black);
+  }
+  .section-title-lg em { font-style: italic; }
+  .section-link {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--stone);
+    text-decoration: none;
+    border-bottom: 1px solid var(--beige);
+    padding-bottom: 4px;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+  .section-link:hover { color: var(--black); border-color: var(--black); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--beige);
+  }
+  .service-card {
+    background: var(--white);
+    padding: 48px 36px;
+    transition: background 0.4s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+    transform-origin: left;
+  }
+  .service-card:hover { background: var(--light); }
+  .service-card:hover::after { transform: scaleX(1); }
+
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--beige);
+    line-height: 1;
+    margin-bottom: 20px;
+    transition: color 0.4s;
+  }
+  .service-card:hover .service-num { color: var(--accent); }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--black);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .service-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--stone);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .service-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--black);
+  }
+  .service-price small {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--stone);
+    margin-left: 4px;
+  }
+
+  /* ABOUT STRIP */
+  .about-strip {
+    background: var(--black);
+    padding: 100px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+  .strip-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 28px;
+  }
+  .strip-title em { font-style: italic; color: var(--accent); }
+  .strip-text {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(250,250,248,0.5);
+    line-height: 1.9;
+    margin-bottom: 40px;
+  }
+  .strip-cta {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--accent);
+    padding: 16px 36px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s;
+  }
+  .strip-cta:hover { background: var(--white); }
+
+  .strip-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .strip-item {
+    padding: 32px 24px;
+    border: 1px solid rgba(250,250,248,0.08);
+    transition: border-color 0.3s;
+  }
+  .strip-item:hover { border-color: rgba(184,149,106,0.4); }
+  .strip-item-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .strip-item-label {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(250,250,248,0.4);
+    letter-spacing: 1px;
+  }
+
+  /* TEAM */
+  .team {
+    padding: 140px 60px;
+    background: var(--light);
+  }
+  .team-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .team-card {
+    background: var(--white);
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.08);
+  }
+  .team-photo {
+    height: 280px;
+    background: var(--beige);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .team-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15,15,15,0.3), transparent);
+  }
+  .team-info {
+    padding: 28px 28px 32px;
+  }
+  .team-role {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .team-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--black);
+    margin-bottom: 10px;
+  }
+  .team-bio {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--stone);
+    line-height: 1.6;
+  }
+
+  /* BOOKING */
+  .booking {
+    padding: 140px 60px;
+    background: var(--white);
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 100px;
+    align-items: start;
+  }
+  .booking-info {
+    position: sticky;
+    top: 100px;
+  }
+  .booking-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--black);
+    margin-bottom: 24px;
+  }
+  .booking-title em { font-style: italic; color: var(--accent); }
+  .booking-sub {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--stone);
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+  .hours-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .hours-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--beige);
+    font-size: 13px;
+    font-weight: 300;
+  }
+  .hours-day { color: var(--black); font-weight: 400; }
+  .hours-time { color: var(--stone); }
+
+  .booking-form {
+    background: var(--light);
+    padding: 56px;
+  }
+  .booking-form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--black);
+    margin-bottom: 40px;
+  }
+  .bform-group {
+    margin-bottom: 20px;
+  }
+  .bform-group label {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 10px;
+  }
+  .bform-group input,
+  .bform-group select,
+  .bform-group textarea {
+    width: 100%;
+    background: var(--white);
+    border: 1px solid var(--beige);
+    color: var(--black);
+    padding: 14px 18px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.3s;
+    appearance: none;
+  }
+  .bform-group input:focus,
+  .bform-group select:focus,
+  .bform-group textarea:focus { border-color: var(--accent); }
+  .bform-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .bform-submit {
+    width: 100%;
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    padding: 18px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 8px;
+  }
+  .bform-submit:hover { background: var(--accent); }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    padding: 80px 60px 40px;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(250,250,248,0.06);
+    margin-bottom: 40px;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .footer-tagline {
+    font-size: 13px;
+    font-weight: 200;
+    color: rgba(250,250,248,0.35);
+    line-height: 1.8;
+    max-width: 240px;
+  }
+  .footer-col h4 {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .footer-col a {
+    display: block;
+    font-size: 13px;
+    font-weight: 200;
+    color: rgba(250,250,248,0.35);
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+  }
+  .footer-col a:hover { color: var(--white); }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(250,250,248,0.2);
+    font-weight: 200;
+  }
+  .dev-badge {
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 300;
+    letter-spacing: 1px;
+    opacity: 0.7;
+  }
+
+  /* ANIMATIONS */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+  .fade-in-delay-1 { transition-delay: 0.1s; }
+  .fade-in-delay-2 { transition-delay: 0.2s; }
+  .fade-in-delay-3 { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Maison Noura</a>
+  <div class="nav-center">
+    <a href="#servicos">Serviços</a>
+    <a href="#equipe">Equipe</a>
+    <a href="#agendamento">Agendamento</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-phone">(67) 99999-0000</span>
+    <a href="#agendamento" class="nav-book">Agendar</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-tag">Campo Grande · MS</p>
+    <h1 class="hero-title">
+      Arte em<br>cada
+      <em>detalhe.</em>
+    </h1>
+    <p class="hero-desc">Cortes precisos, colorações exclusivas e tratamentos premium. Onde beleza encontra sofisticação em Campo Grande.</p>
+    <div class="hero-actions">
+      <a href="#agendamento" class="btn-dark">Agendar horário</a>
+      <a href="#servicos" class="btn-outline">Ver serviços</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-top">
+      <span class="overlay-text">"Beleza que transforma."</span>
+    </div>
+    <div class="hero-img-bottom">
+      <div class="hero-stat">
+        <p class="hero-stat-num">12+</p>
+        <p class="hero-stat-label">Anos de experiência</p>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="hero-stat">
+        <p class="hero-stat-num">4.9</p>
+        <p class="hero-stat-label">Avaliação Google</p>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="hero-stat">
+        <p class="hero-stat-num">3k+</p>
+        <p class="hero-stat-label">Clientes satisfeitos</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="servicos">
+  <div class="services-header fade-in">
+    <div>
+      <p class="section-eyebrow">O que oferecemos</p>
+      <h2 class="section-title-lg">Nossos <em>serviços</em></h2>
+    </div>
+    <a href="#agendamento" class="section-link">Agendar agora →</a>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-in">
+      <p class="service-num">01</p>
+      <h3 class="service-name">Corte Feminino</h3>
+      <p class="service-desc">Corte personalizado conforme seu rosto, estilo e personalidade. Inclui lavagem e finalização completa.</p>
+      <p class="service-price">R$ 80 <small>em diante</small></p>
+    </div>
+    <div class="service-card fade-in fade-in-delay-1">
+      <p class="service-num">02</p>
+      <h3 class="service-name">Coloração & Mechas</h3>
+      <p class="service-desc">Técnicas exclusivas de coloração com produtos de alta performance. Balayage, ombré e colorações globais.</p>
+      <p class="service-price">R$ 150 <small>em diante</small></p>
+    </div>
+    <div class="service-card fade-in fade-in-delay-2">
+      <p class="service-num">03</p>
+      <h3 class="service-name">Tratamentos Capilares</h3>
+      <p class="service-desc">Cronograma capilar completo, hidratação, nutrição e reconstrução. Cabelos transformados em uma sessão.</p>
+      <p class="service-price">R$ 120 <small>em diante</small></p>
+    </div>
+    <div class="service-card fade-in fade-in-delay-3">
+      <p class="service-num">04</p>
+      <h3 class="service-name">Barbearia Premium</h3>
+      <p class="service-desc">Corte masculino, barba modelada e tratamentos exclusivos para homens que valorizam estilo e cuidado.</p>
+      <p class="service-price">R$ 60 <small>em diante</small></p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT STRIP -->
+<section class="about-strip">
+  <div class="fade-in">
+    <h2 class="strip-title">Mais que um salão,<br><em>uma experiência</em></h2>
+    <p class="strip-text">No Maison Noura, cada cliente é único. Nossa equipe de profissionais altamente qualificados está aqui para transformar sua visão em realidade, usando as melhores técnicas e produtos do mercado.</p>
+    <a href="#agendamento" class="strip-cta">Agendar meu horário</a>
+  </div>
+  <div class="strip-right fade-in fade-in-delay-2">
+    <div class="strip-item">
+      <p class="strip-item-num">12+</p>
+      <p class="strip-item-label">Anos no mercado</p>
+    </div>
+    <div class="strip-item">
+      <p class="strip-item-num">3k+</p>
+      <p class="strip-item-label">Clientes atendidos</p>
+    </div>
+    <div class="strip-item">
+      <p class="strip-item-num">6</p>
+      <p class="strip-item-label">Profissionais</p>
+    </div>
+    <div class="strip-item">
+      <p class="strip-item-num">4.9</p>
+      <p class="strip-item-label">Nota Google</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="equipe">
+  <div class="team-header fade-in">
+    <p class="section-eyebrow">Quem vai te atender</p>
+    <h2 class="section-title-lg">Nossa <em>equipe</em></h2>
+  </div>
+  <div class="team-grid">
+    <div class="team-card fade-in">
+      <div class="team-photo">✂</div>
+      <div class="team-info">
+        <p class="team-role">Fundadora & Colorista</p>
+        <h3 class="team-name">Noura Khalil</h3>
+        <p class="team-bio">12 anos de experiência em coloração e técnicas europeias. Especialista em balayage e correção de cor.</p>
+      </div>
+    </div>
+    <div class="team-card fade-in fade-in-delay-1">
+      <div class="team-photo">💈</div>
+      <div class="team-info">
+        <p class="team-role">Barbeiro Premium</p>
+        <h3 class="team-name">Rafael Torres</h3>
+        <p class="team-bio">Especialista em cortes masculinos clássicos e contemporâneos. Referência em barbearia em Campo Grande.</p>
+      </div>
+    </div>
+    <div class="team-card fade-in fade-in-delay-2">
+      <div class="team-photo">🪄</div>
+      <div class="team-info">
+        <p class="team-role">Especialista em Tratamentos</p>
+        <h3 class="team-name">Camila Souza</h3>
+        <p class="team-bio">Formada em cosmetologia, especialista em reconstrução capilar e cronograma personalizado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="agendamento">
+  <div class="booking-info fade-in">
+    <p class="section-eyebrow">Agende agora</p>
+    <h2 class="booking-title">Reserve seu <em>horário</em></h2>
+    <p class="booking-sub">Atendemos com hora marcada para garantir a melhor experiência possível. Agende com antecedência e garanta seu horário preferido.</p>
+    <div class="hours-list">
+      <div class="hours-item">
+        <span class="hours-day">Segunda a Sexta</span>
+        <span class="hours-time">9h00 – 20h00</span>
+      </div>
+      <div class="hours-item">
+        <span class="hours-day">Sábado</span>
+        <span class="hours-time">8h00 – 18h00</span>
+      </div>
+      <div class="hours-item">
+        <span class="hours-day">Domingo</span>
+        <span class="hours-time">Fechado</span>
+      </div>
+    </div>
+  </div>
+  <div class="booking-form fade-in fade-in-delay-2">
+    <h3 class="booking-form-title">Faça seu agendamento</h3>
+    <div class="bform-row">
+      <div class="bform-group">
+        <label>Nome completo</label>
+        <input type="text" placeholder="Seu nome">
+      </div>
+      <div class="bform-group">
+        <label>WhatsApp</label>
+        <input type="tel" placeholder="(67) 99999-0000">
+      </div>
+    </div>
+    <div class="bform-group">
+      <label>Serviço desejado</label>
+      <select>
+        <option>Corte Feminino</option>
+        <option>Coloração & Mechas</option>
+        <option>Tratamento Capilar</option>
+        <option>Barbearia Premium</option>
+        <option>Pacote Completo</option>
+      </select>
+    </div>
+    <div class="bform-row">
+      <div class="bform-group">
+        <label>Data preferida</label>
+        <input type="date">
+      </div>
+      <div class="bform-group">
+        <label>Horário</label>
+        <select>
+          <option>9h00</option>
+          <option>10h00</option>
+          <option>11h00</option>
+          <option>14h00</option>
+          <option>15h00</option>
+          <option>16h00</option>
+          <option>17h00</option>
+          <option>19h00</option>
+        </select>
+      </div>
+    </div>
+    <div class="bform-group">
+      <label>Profissional (opcional)</label>
+      <select>
+        <option>Sem preferência</option>
+        <option>Noura Khalil</option>
+        <option>Rafael Torres</option>
+        <option>Camila Souza</option>
+      </select>
+    </div>
+    <button class="bform-submit">Confirmar Agendamento</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <p class="footer-logo">Maison Noura</p>
+      <p class="footer-tagline">Salão & Barbearia Premium em Campo Grande, MS. Arte em cada detalhe.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <a href="#">Início</a>
+      <a href="#">Serviços</a>
+      <a href="#">Equipe</a>
+      <a href="#">Agendamento</a>
+    </div>
+    <div class="footer-col">
+      <h4>Serviços</h4>
+      <a href="#">Corte Feminino</a>
+      <a href="#">Coloração</a>
+      <a href="#">Tratamentos</a>
+      <a href="#">Barbearia</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <a href="#">(67) 99999-0000</a>
+      <a href="#">Instagram</a>
+      <a href="#">WhatsApp</a>
+      <a href="#">Campo Grande/MS</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Maison Noura. Todos os direitos reservados.</p>
+    <p class="dev-badge">Desenvolvido por Dev 67 Studio</p>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('compact', window.scrollY > 60);
+  });
+
+  const fades = document.querySelectorAll('.fade-in');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  fades.forEach(f => obs.observe(f));
+</script>
+</body>
+</html>
