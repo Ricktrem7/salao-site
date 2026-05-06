@@ -1,760 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maison Noura — Salão & Barbearia</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --white: #fafaf8;
-    --black: #0f0f0f;
-    --stone: #9c8e82;
-    --beige: #e8e0d5;
-    --accent: #b8956a;
-    --light: #f2ede8;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Outfit', sans-serif;
-    background: var(--white);
-    color: var(--black);
-    overflow-x: hidden;
-  }
-
-  /* NAVBAR */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 28px 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--white);
-    border-bottom: 1px solid var(--beige);
-    transition: padding 0.4s ease;
-  }
-  nav.compact { padding: 18px 60px; }
-
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 5px;
-    color: var(--black);
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-  .nav-center {
-    display: flex;
-    gap: 48px;
-  }
-  .nav-center a {
-    font-size: 11px;
-    font-weight: 300;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--stone);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  .nav-center a:hover { color: var(--black); }
-
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-  }
-  .nav-phone {
-    font-size: 12px;
-    font-weight: 300;
-    color: var(--stone);
-    letter-spacing: 1px;
-  }
-  .nav-book {
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--white);
-    background: var(--black);
-    padding: 12px 28px;
-    text-decoration: none;
-    transition: background 0.3s;
-  }
-  .nav-book:hover { background: var(--accent); }
-
-  /* HERO */
-  .hero {
-    padding-top: 90px;
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .hero-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 80px 60px;
-    position: relative;
-  }
-  .hero-left::after {
-    content: '';
-    position: absolute;
-    top: 0; right: 0;
-    width: 1px; height: 100%;
-    background: var(--beige);
-  }
-
-  .hero-tag {
-    font-size: 10px;
-    font-weight: 400;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 32px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .hero-tag::before {
-    content: '';
-    width: 24px; height: 1px;
-    background: var(--accent);
-  }
-
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(60px, 7vw, 100px);
-    font-weight: 300;
-    line-height: 0.95;
-    color: var(--black);
-    margin-bottom: 40px;
-  }
-  .hero-title em {
-    font-style: italic;
-    font-weight: 300;
-    display: block;
-    color: var(--accent);
-  }
-
-  .hero-desc {
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 1.8;
-    color: var(--stone);
-    max-width: 380px;
-    margin-bottom: 48px;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-  }
-  .btn-dark {
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--white);
-    background: var(--black);
-    padding: 16px 36px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-  .btn-dark:hover { background: var(--accent); }
-  .btn-outline {
-    font-size: 11px;
-    font-weight: 300;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--black);
-    border: 1px solid var(--beige);
-    padding: 16px 36px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-  .btn-outline:hover { border-color: var(--black); }
-
-  .hero-right {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-  }
-  .hero-img-top {
-    background: var(--beige);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-img-top::before {
-    content: '✂';
-    font-size: 120px;
-    color: var(--stone);
-    opacity: 0.2;
-    animation: rotate-slow 20s linear infinite;
-  }
-  @keyframes rotate-slow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-  .hero-img-top .overlay-text {
-    position: absolute;
-    bottom: 24px;
-    left: 24px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    font-style: italic;
-    color: var(--stone);
-    letter-spacing: 1px;
-  }
-
-  .hero-img-bottom {
-    background: var(--black);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 48px;
-  }
-  .hero-stat {
-    text-align: center;
-  }
-  .hero-stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 52px;
-    font-weight: 300;
-    color: var(--white);
-    line-height: 1;
-  }
-  .hero-stat-label {
-    font-size: 10px;
-    font-weight: 300;
-    letter-spacing: 2px;
-    color: rgba(250,250,248,0.4);
-    text-transform: uppercase;
-    margin-top: 6px;
-  }
-  .stat-divider {
-    width: 1px;
-    height: 60px;
-    background: rgba(250,250,248,0.1);
-  }
-
-  /* SERVICES */
-  .services {
-    padding: 140px 60px;
-    background: var(--white);
-  }
-  .services-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 80px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid var(--beige);
-  }
-  .section-eyebrow {
-    font-size: 10px;
-    font-weight: 400;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 16px;
-  }
-  .section-title-lg {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 56px;
-    font-weight: 300;
-    line-height: 1.1;
-    color: var(--black);
-  }
-  .section-title-lg em { font-style: italic; }
-  .section-link {
-    font-size: 11px;
-    font-weight: 300;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--stone);
-    text-decoration: none;
-    border-bottom: 1px solid var(--beige);
-    padding-bottom: 4px;
-    transition: all 0.3s;
-    white-space: nowrap;
-  }
-  .section-link:hover { color: var(--black); border-color: var(--black); }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--beige);
-  }
-  .service-card {
-    background: var(--white);
-    padding: 48px 36px;
-    transition: background 0.4s ease;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .service-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 100%; height: 3px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transition: transform 0.4s ease;
-    transform-origin: left;
-  }
-  .service-card:hover { background: var(--light); }
-  .service-card:hover::after { transform: scaleX(1); }
-
-  .service-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 48px;
-    font-weight: 300;
-    color: var(--beige);
-    line-height: 1;
-    margin-bottom: 20px;
-    transition: color 0.4s;
-  }
-  .service-card:hover .service-num { color: var(--accent); }
-  .service-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 24px;
-    font-weight: 400;
-    color: var(--black);
-    margin-bottom: 12px;
-    line-height: 1.2;
-  }
-  .service-desc {
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--stone);
-    line-height: 1.7;
-    margin-bottom: 24px;
-  }
-  .service-price {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 300;
-    color: var(--black);
-  }
-  .service-price small {
-    font-family: 'Outfit', sans-serif;
-    font-size: 12px;
-    font-weight: 300;
-    color: var(--stone);
-    margin-left: 4px;
-  }
-
-  /* ABOUT STRIP */
-  .about-strip {
-    background: var(--black);
-    padding: 100px 60px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 100px;
-    align-items: center;
-  }
-  .strip-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 52px;
-    font-weight: 300;
-    color: var(--white);
-    line-height: 1.15;
-    margin-bottom: 28px;
-  }
-  .strip-title em { font-style: italic; color: var(--accent); }
-  .strip-text {
-    font-size: 14px;
-    font-weight: 300;
-    color: rgba(250,250,248,0.5);
-    line-height: 1.9;
-    margin-bottom: 40px;
-  }
-  .strip-cta {
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--black);
-    background: var(--accent);
-    padding: 16px 36px;
-    text-decoration: none;
-    display: inline-block;
-    transition: background 0.3s;
-  }
-  .strip-cta:hover { background: var(--white); }
-
-  .strip-right {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  .strip-item {
-    padding: 32px 24px;
-    border: 1px solid rgba(250,250,248,0.08);
-    transition: border-color 0.3s;
-  }
-  .strip-item:hover { border-color: rgba(184,149,106,0.4); }
-  .strip-item-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 40px;
-    font-weight: 300;
-    color: var(--accent);
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-  .strip-item-label {
-    font-size: 12px;
-    font-weight: 300;
-    color: rgba(250,250,248,0.4);
-    letter-spacing: 1px;
-  }
-
-  /* TEAM */
-  .team {
-    padding: 140px 60px;
-    background: var(--light);
-  }
-  .team-header {
-    text-align: center;
-    margin-bottom: 80px;
-  }
-  .team-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-  }
-  .team-card {
-    background: var(--white);
-    overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-  }
-  .team-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 24px 60px rgba(0,0,0,0.08);
-  }
-  .team-photo {
-    height: 280px;
-    background: var(--beige);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 80px;
-    position: relative;
-    overflow: hidden;
-  }
-  .team-photo::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(15,15,15,0.3), transparent);
-  }
-  .team-info {
-    padding: 28px 28px 32px;
-  }
-  .team-role {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-  .team-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 26px;
-    font-weight: 400;
-    color: var(--black);
-    margin-bottom: 10px;
-  }
-  .team-bio {
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--stone);
-    line-height: 1.6;
-  }
-
-  /* BOOKING */
-  .booking {
-    padding: 140px 60px;
-    background: var(--white);
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 100px;
-    align-items: start;
-  }
-  .booking-info {
-    position: sticky;
-    top: 100px;
-  }
-  .booking-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 52px;
-    font-weight: 300;
-    line-height: 1.1;
-    color: var(--black);
-    margin-bottom: 24px;
-  }
-  .booking-title em { font-style: italic; color: var(--accent); }
-  .booking-sub {
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--stone);
-    line-height: 1.8;
-    margin-bottom: 48px;
-  }
-  .hours-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  .hours-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--beige);
-    font-size: 13px;
-    font-weight: 300;
-  }
-  .hours-day { color: var(--black); font-weight: 400; }
-  .hours-time { color: var(--stone); }
-
-  .booking-form {
-    background: var(--light);
-    padding: 56px;
-  }
-  .booking-form-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 32px;
-    font-weight: 400;
-    color: var(--black);
-    margin-bottom: 40px;
-  }
-  .bform-group {
-    margin-bottom: 20px;
-  }
-  .bform-group label {
-    display: block;
-    font-size: 10px;
-    font-weight: 400;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--stone);
-    margin-bottom: 10px;
-  }
-  .bform-group input,
-  .bform-group select,
-  .bform-group textarea {
-    width: 100%;
-    background: var(--white);
-    border: 1px solid var(--beige);
-    color: var(--black);
-    padding: 14px 18px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 14px;
-    font-weight: 300;
-    outline: none;
-    transition: border-color 0.3s;
-    appearance: none;
-  }
-  .bform-group input:focus,
-  .bform-group select:focus,
-  .bform-group textarea:focus { border-color: var(--accent); }
-  .bform-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  .bform-submit {
-    width: 100%;
-    background: var(--black);
-    color: var(--white);
-    border: none;
-    padding: 18px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.3s;
-    margin-top: 8px;
-  }
-  .bform-submit:hover { background: var(--accent); }
-
-  /* FOOTER */
-  footer {
-    background: var(--black);
-    padding: 80px 60px 40px;
-  }
-  .footer-top {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 60px;
-    padding-bottom: 60px;
-    border-bottom: 1px solid rgba(250,250,248,0.06);
-    margin-bottom: 40px;
-  }
-  .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 600;
-    letter-spacing: 5px;
-    color: var(--white);
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-  .footer-tagline {
-    font-size: 13px;
-    font-weight: 200;
-    color: rgba(250,250,248,0.35);
-    line-height: 1.8;
-    max-width: 240px;
-  }
-  .footer-col h4 {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 20px;
-  }
-  .footer-col a {
-    display: block;
-    font-size: 13px;
-    font-weight: 200;
-    color: rgba(250,250,248,0.35);
-    text-decoration: none;
-    margin-bottom: 10px;
-    transition: color 0.3s;
-  }
-  .footer-col a:hover { color: var(--white); }
-  .footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .footer-copy {
-    font-size: 11px;
-    color: rgba(250,250,248,0.2);
-    font-weight: 200;
-  }
-  .dev-badge {
-    font-size: 11px;
-    color: var(--accent);
-    font-weight: 300;
-    letter-spacing: 1px;
-    opacity: 0.7;
-  }
-
-  /* ANIMATIONS */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .fade-in.visible {
-    opacity: 1;
-    transform: none;
-  }
-  .fade-in-delay-1 { transition-delay: 0.1s; }
-  .fade-in-delay-2 { transition-delay: 0.2s; }
-  .fade-in-delay-3 { transition-delay: 0.3s; }
-
-  /* MOBILE RESPONSIVO */
-  @media (max-width: 768px) {
-    nav {
-      padding: 16px 20px;
-    }
-    .nav-center { display: none; }
-    .nav-book {
-      font-size: 10px;
-      padding: 8px 16px;
-    }
-
-    .hero {
-      grid-template-columns: 1fr;
-      padding-top: 90px;
-    }
-    .hero-left {
-      padding: 80px 24px;
-    }
-    .hero-title {
-      font-size: 48px;
-    }
-
-    .services {
-      padding: 80px 24px;
-    }
-    .services-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 24px;
-    }
-    .section-title-lg {
-      font-size: 40px;
-    }
-
-    .team {
-      padding: 80px 24px;
-    }
-    .team-grid {
-      grid-template-columns: 1fr;
-      gap: 48px;
-    }
-
-    .booking {
-      grid-template-columns: 1fr;
-      gap: 48px;
-      padding: 80px 24px;
-    }
-    .booking-info {
-      position: static;
-    }
-    .booking-title {
-      font-size: 36px;
-    }
-    .bform-row {
-      grid-template-columns: 1fr;
-    }
-
-    footer {
-      padding: 60px 24px 32px;
-    }
-    .footer-top {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-    .footer-bottom {
-      flex-direction: column;
-      gap: 12px;
-      text-align: center;
-    }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maison Imóveis — Imobiliária Premium</title>
+  <meta name="description" content="Imobiliária premium em Campo Grande, MS. Apartamentos, casas e terrenos de alto padrão com atendimento exclusivo.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- NAVBAR -->
 <nav id="navbar">
-  <a href="#" class="nav-logo">Maison Noura</a>
+  <a href="#" class="nav-logo">Maison Imóveis</a>
   <div class="nav-center">
+    <a href="#imoveis">Imóveis</a>
     <a href="#servicos">Serviços</a>
-    <a href="#equipe">Equipe</a>
-    <a href="#agendamento">Agendamento</a>
+    <a href="#bairros">Bairros</a>
+    <a href="#contato">Contato</a>
   </div>
   <div class="nav-right">
-    <span class="nav-phone">(67) 99999-0000</span>
-    <a href="#agendamento" class="nav-book">Agendar</a>
+    <a class="nav-phone" href="tel:+5567999990000">(67) 99999-0000</a>
+    <a href="#contato" class="nav-cta">Fale conosco</a>
+  </div>
+  <div class="hamburger" onclick="document.querySelector('.nav-center').classList.toggle('active')">
+    <span></span><span></span><span></span>
   </div>
 </nav>
 
@@ -763,71 +33,131 @@
   <div class="hero-left">
     <p class="hero-tag">Campo Grande · MS</p>
     <h1 class="hero-title">
-      Arte em<br>cada
-      <em>detalhe.</em>
+      Encontre seu<br>novo
+      <em>endereço.</em>
     </h1>
-    <p class="hero-desc">Cortes precisos, colorações exclusivas e tratamentos premium. Onde beleza encontra sofisticação em Campo Grande.</p>
+    <p class="hero-desc">Imóveis exclusivos de alto padrão em Campo Grande. Casas, apartamentos e terrenos selecionados para quem busca sofisticação e qualidade de vida.</p>
     <div class="hero-actions">
-      <a href="#agendamento" class="btn-dark">Agendar horário</a>
-      <a href="#servicos" class="btn-outline">Ver serviços</a>
+      <a href="#imoveis" class="btn-dark">Ver imóveis</a>
+      <a href="#contato" class="btn-outline">Fale conosco</a>
     </div>
   </div>
   <div class="hero-right">
-    <div class="hero-img-top">
-      <span class="overlay-text">"Beleza que transforma."</span>
+    <div class="hero-img-top" style="background-image: url('img/hero.png')">
+      <span class="overlay-text">"Onde luxo encontra conforto."</span>
     </div>
     <div class="hero-img-bottom">
       <div class="hero-stat">
-        <p class="hero-stat-num">12+</p>
-        <p class="hero-stat-label">Anos de experiência</p>
+        <p class="hero-stat-num">8+</p>
+        <p class="hero-stat-label">Anos de mercado</p>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="hero-stat">
+        <p class="hero-stat-num">500+</p>
+        <p class="hero-stat-label">Imóveis vendidos</p>
       </div>
       <div class="stat-divider"></div>
       <div class="hero-stat">
         <p class="hero-stat-num">4.9</p>
         <p class="hero-stat-label">Avaliação Google</p>
       </div>
-      <div class="stat-divider"></div>
-      <div class="hero-stat">
-        <p class="hero-stat-num">3k+</p>
-        <p class="hero-stat-label">Clientes satisfeitos</p>
-      </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="services" id="servicos">
-  <div class="services-header fade-in">
+<!-- PROPERTIES -->
+<section class="properties" id="imoveis">
+  <div class="properties-header fade-in">
     <div>
-      <p class="section-eyebrow">O que oferecemos</p>
+      <p class="section-eyebrow">Portfólio exclusivo</p>
+      <h2 class="section-title-lg">Imóveis em <em>destaque</em></h2>
+    </div>
+    <a href="#contato" class="section-link">Ver todos os imóveis →</a>
+  </div>
+  <div class="properties-grid">
+
+    <div class="property-card fade-in">
+      <div class="property-img" style="background-image: url('img/apartment.png')">
+        <span class="property-badge">Destaque</span>
+      </div>
+      <div class="property-info">
+        <p class="property-type">Apartamento</p>
+        <h3 class="property-name">Residencial Brise</h3>
+        <p class="property-location">📍 Jardim dos Estados</p>
+        <div class="property-details">
+          <span class="property-detail"><strong>3</strong> Quartos</span>
+          <span class="property-detail"><strong>2</strong> Vagas</span>
+          <span class="property-detail"><strong>142</strong> m²</span>
+        </div>
+        <p class="property-price">R$ 890.000 <small>à vista</small></p>
+      </div>
+    </div>
+
+    <div class="property-card fade-in fade-in-delay-1">
+      <div class="property-img" style="background-image: url('img/house.png')">
+        <span class="property-badge">Premium</span>
+      </div>
+      <div class="property-info">
+        <p class="property-type">Casa</p>
+        <h3 class="property-name">Villa Paradiso</h3>
+        <p class="property-location">📍 Alphaville CG</p>
+        <div class="property-details">
+          <span class="property-detail"><strong>4</strong> Suítes</span>
+          <span class="property-detail"><strong>4</strong> Vagas</span>
+          <span class="property-detail"><strong>380</strong> m²</span>
+        </div>
+        <p class="property-price">R$ 2.450.000 <small>à vista</small></p>
+      </div>
+    </div>
+
+    <div class="property-card fade-in fade-in-delay-2">
+      <div class="property-img" style="background-image: url('img/penthouse.png')">
+        <span class="property-badge">Exclusivo</span>
+      </div>
+      <div class="property-info">
+        <p class="property-type">Cobertura</p>
+        <h3 class="property-name">Sky Residence</h3>
+        <p class="property-location">📍 Chácara Cachoeira</p>
+        <div class="property-details">
+          <span class="property-detail"><strong>3</strong> Suítes</span>
+          <span class="property-detail"><strong>3</strong> Vagas</span>
+          <span class="property-detail"><strong>260</strong> m²</span>
+        </div>
+        <p class="property-price">R$ 1.780.000 <small>à vista</small></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-strip" id="servicos">
+  <div class="properties-header fade-in" style="margin-bottom:60px; padding-bottom:40px; border-bottom:1px solid var(--beige);">
+    <div>
+      <p class="section-eyebrow">Como podemos ajudar</p>
       <h2 class="section-title-lg">Nossos <em>serviços</em></h2>
     </div>
-    <a href="#agendamento" class="section-link">Agendar agora →</a>
   </div>
   <div class="services-grid">
     <div class="service-card fade-in">
       <p class="service-num">01</p>
-      <h3 class="service-name">Corte Feminino</h3>
-      <p class="service-desc">Corte personalizado conforme seu rosto, estilo e personalidade. Inclui lavagem e finalização completa.</p>
-      <p class="service-price">R$ 80 <small>em diante</small></p>
+      <h3 class="service-name">Compra & Venda</h3>
+      <p class="service-desc">Assessoria completa na compra e venda de imóveis residenciais e comerciais de alto padrão.</p>
     </div>
     <div class="service-card fade-in fade-in-delay-1">
       <p class="service-num">02</p>
-      <h3 class="service-name">Coloração & Mechas</h3>
-      <p class="service-desc">Técnicas exclusivas de coloração com produtos de alta performance. Balayage, ombré e colorações globais.</p>
-      <p class="service-price">R$ 150 <small>em diante</small></p>
+      <h3 class="service-name">Locação Premium</h3>
+      <p class="service-desc">Gestão de locação com curadoria de inquilinos e atendimento personalizado para proprietários.</p>
     </div>
     <div class="service-card fade-in fade-in-delay-2">
       <p class="service-num">03</p>
-      <h3 class="service-name">Tratamentos Capilares</h3>
-      <p class="service-desc">Cronograma capilar completo, hidratação, nutrição e reconstrução. Cabelos transformados em uma sessão.</p>
-      <p class="service-price">R$ 120 <small>em diante</small></p>
+      <h3 class="service-name">Avaliação</h3>
+      <p class="service-desc">Avaliação precisa do seu imóvel com análise de mercado atualizada e relatório detalhado.</p>
     </div>
     <div class="service-card fade-in fade-in-delay-3">
       <p class="service-num">04</p>
-      <h3 class="service-name">Barbearia Premium</h3>
-      <p class="service-desc">Corte masculino, barba modelada e tratamentos exclusivos para homens que valorizam estilo e cuidado.</p>
-      <p class="service-price">R$ 60 <small>em diante</small></p>
+      <h3 class="service-name">Consultoria</h3>
+      <p class="service-desc">Consultoria para investimentos imobiliários com análise de rentabilidade e potencial de valorização.</p>
     </div>
   </div>
 </section>
@@ -835,22 +165,22 @@
 <!-- ABOUT STRIP -->
 <section class="about-strip">
   <div class="fade-in">
-    <h2 class="strip-title">Mais que um salão,<br><em>uma experiência</em></h2>
-    <p class="strip-text">No Maison Noura, cada cliente é único. Nossa equipe de profissionais altamente qualificados está aqui para transformar sua visão em realidade, usando as melhores técnicas e produtos do mercado.</p>
-    <a href="#agendamento" class="strip-cta">Agendar meu horário</a>
+    <h2 class="strip-title">Mais que imóveis,<br><em>realizamos sonhos</em></h2>
+    <p class="strip-text">Na Maison Imóveis, cada propriedade é cuidadosamente selecionada para atender os mais altos padrões. Nossa equipe de especialistas está pronta para guiar você em cada etapa, da busca à chave na mão.</p>
+    <a href="#contato" class="strip-cta">Falar com especialista</a>
   </div>
   <div class="strip-right fade-in fade-in-delay-2">
     <div class="strip-item">
-      <p class="strip-item-num">12+</p>
-      <p class="strip-item-label">Anos no mercado</p>
+      <p class="strip-item-num">8+</p>
+      <p class="strip-item-label">Anos de mercado</p>
     </div>
     <div class="strip-item">
-      <p class="strip-item-num">3k+</p>
-      <p class="strip-item-label">Clientes atendidos</p>
+      <p class="strip-item-num">500+</p>
+      <p class="strip-item-label">Imóveis vendidos</p>
     </div>
     <div class="strip-item">
-      <p class="strip-item-num">6</p>
-      <p class="strip-item-label">Profissionais</p>
+      <p class="strip-item-num">R$2Bi</p>
+      <p class="strip-item-label">Em negócios</p>
     </div>
     <div class="strip-item">
       <p class="strip-item-num">4.9</p>
@@ -859,112 +189,129 @@
   </div>
 </section>
 
-<!-- TEAM -->
-<section class="team" id="equipe">
-  <div class="team-header fade-in">
-    <p class="section-eyebrow">Quem vai te atender</p>
-    <h2 class="section-title-lg">Nossa <em>equipe</em></h2>
+<!-- NEIGHBORHOODS -->
+<section class="neighborhoods" id="bairros">
+  <div class="neighborhoods-header fade-in">
+    <p class="section-eyebrow">Regiões atendidas</p>
+    <h2 class="section-title-lg">Bairros <em>premium</em></h2>
   </div>
-  <div class="team-grid">
-    <div class="team-card fade-in">
-      <div class="team-photo">✂</div>
-      <div class="team-info">
-        <p class="team-role">Fundadora & Colorista</p>
-        <h3 class="team-name">Noura Khalil</h3>
-        <p class="team-bio">12 anos de experiência em coloração e técnicas europeias. Especialista em balayage e correção de cor.</p>
+  <div class="neighborhoods-grid">
+    <div class="neighborhood-card fade-in">
+      <img src="img/apartment.png" alt="Jardim dos Estados" class="neighborhood-bg">
+      <div class="neighborhood-info">
+        <h3 class="neighborhood-name">Jardim dos Estados</h3>
+        <p class="neighborhood-count">24 imóveis disponíveis</p>
       </div>
     </div>
-    <div class="team-card fade-in fade-in-delay-1">
-      <div class="team-photo">💈</div>
-      <div class="team-info">
-        <p class="team-role">Barbeiro Premium</p>
-        <h3 class="team-name">Rafael Torres</h3>
-        <p class="team-bio">Especialista em cortes masculinos clássicos e contemporâneos. Referência em barbearia em Campo Grande.</p>
+    <div class="neighborhood-card fade-in fade-in-delay-1">
+      <img src="img/house.png" alt="Chácara Cachoeira" class="neighborhood-bg">
+      <div class="neighborhood-info">
+        <h3 class="neighborhood-name">Chácara Cachoeira</h3>
+        <p class="neighborhood-count">18 imóveis disponíveis</p>
       </div>
     </div>
-    <div class="team-card fade-in fade-in-delay-2">
-      <div class="team-photo">🪄</div>
-      <div class="team-info">
-        <p class="team-role">Especialista em Tratamentos</p>
-        <h3 class="team-name">Camila Souza</h3>
-        <p class="team-bio">Formada em cosmetologia, especialista em reconstrução capilar e cronograma personalizado.</p>
+    <div class="neighborhood-card fade-in fade-in-delay-2">
+      <img src="img/penthouse.png" alt="Vilas Boas" class="neighborhood-bg">
+      <div class="neighborhood-info">
+        <h3 class="neighborhood-name">Vilas Boas</h3>
+        <p class="neighborhood-count">31 imóveis disponíveis</p>
+      </div>
+    </div>
+    <div class="neighborhood-card fade-in fade-in-delay-3">
+      <img src="img/hero.png" alt="Alphaville" class="neighborhood-bg">
+      <div class="neighborhood-info">
+        <h3 class="neighborhood-name">Alphaville CG</h3>
+        <p class="neighborhood-count">15 imóveis disponíveis</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BOOKING -->
-<section class="booking" id="agendamento">
-  <div class="booking-info fade-in">
-    <p class="section-eyebrow">Agende agora</p>
-    <h2 class="booking-title">Reserve seu <em>horário</em></h2>
-    <p class="booking-sub">Atendemos com hora marcada para garantir a melhor experiência possível. Agende com antecedência e garanta seu horário preferido.</p>
-    <div class="hours-list">
-      <div class="hours-item">
-        <span class="hours-day">Segunda a Sexta</span>
-        <span class="hours-time">9h00 – 20h00</span>
+<!-- CONTACT -->
+<section class="contact" id="contato">
+  <div class="contact-info fade-in">
+    <p class="section-eyebrow">Fale conosco</p>
+    <h2 class="contact-title">Vamos encontrar o <em>imóvel ideal</em></h2>
+    <p class="contact-sub">Entre em contato e um de nossos consultores especializados irá atendê-lo com toda a atenção que você merece.</p>
+    <div class="contact-quick">
+      <a class="quick-btn quick-btn--wa" href="https://wa.me/5567999990000?text=Ol%C3%A1%21%20Quero%20atendimento%20para%20im%C3%B3veis." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a class="quick-btn" href="tel:+5567999990000">Ligar</a>
+      <a class="quick-btn" href="mailto:contato@maisonimov.com?subject=Atendimento%20Maison%20Im%C3%B3veis&body=Ol%C3%A1%21%20Gostaria%20de%20atendimento.">E-mail</a>
+      <a class="quick-btn" href="https://www.google.com/maps/search/?api=1&query=Av.%20Afonso%20Pena%2C%204000%2C%20Campo%20Grande%20MS" target="_blank" rel="noopener noreferrer">Como chegar</a>
+    </div>
+    <div class="info-list">
+      <div class="info-item">
+        <span class="info-label">Endereço</span>
+        <a class="info-value" href="https://www.google.com/maps/search/?api=1&query=Av.%20Afonso%20Pena%2C%204000%2C%20Campo%20Grande%20MS" target="_blank" rel="noopener noreferrer">Av. Afonso Pena, 4000</a>
       </div>
-      <div class="hours-item">
-        <span class="hours-day">Sábado</span>
-        <span class="hours-time">8h00 – 18h00</span>
+      <div class="info-item">
+        <span class="info-label">Telefone</span>
+        <a class="info-value" href="tel:+5567999990000">(67) 99999-0000</a>
       </div>
-      <div class="hours-item">
-        <span class="hours-day">Domingo</span>
-        <span class="hours-time">Fechado</span>
+      <div class="info-item">
+        <span class="info-label">E-mail</span>
+        <a class="info-value" href="mailto:contato@maisonimov.com">contato@maisonimov.com</a>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Horário</span>
+        <span class="info-value">Seg–Sex, 8h–18h</span>
       </div>
     </div>
   </div>
-  <div class="booking-form fade-in fade-in-delay-2">
-    <h3 class="booking-form-title">Faça seu agendamento</h3>
-    <div class="bform-row">
-      <div class="bform-group">
-        <label>Nome completo</label>
-        <input type="text" placeholder="Seu nome">
+  <div class="contact-form fade-in fade-in-delay-2">
+    <h3 class="contact-form-title">Solicite atendimento</h3>
+    <form class="cform" id="leadForm">
+      <div class="cform-row">
+        <div class="cform-group">
+          <label for="leadName">Nome completo</label>
+          <input id="leadName" name="name" type="text" placeholder="Seu nome" autocomplete="name" required>
+        </div>
+        <div class="cform-group">
+          <label for="leadWhatsapp">WhatsApp</label>
+          <input id="leadWhatsapp" name="whatsapp" type="tel" placeholder="(67) 99999-0000" inputmode="tel" autocomplete="tel" required>
+        </div>
       </div>
-      <div class="bform-group">
-        <label>WhatsApp</label>
-        <input type="tel" placeholder="(67) 99999-0000">
-      </div>
-    </div>
-    <div class="bform-group">
-      <label>Serviço desejado</label>
-      <select>
-        <option>Corte Feminino</option>
-        <option>Coloração & Mechas</option>
-        <option>Tratamento Capilar</option>
-        <option>Barbearia Premium</option>
-        <option>Pacote Completo</option>
-      </select>
-    </div>
-    <div class="bform-row">
-      <div class="bform-group">
-        <label>Data preferida</label>
-        <input type="date">
-      </div>
-      <div class="bform-group">
-        <label>Horário</label>
-        <select>
-          <option>9h00</option>
-          <option>10h00</option>
-          <option>11h00</option>
-          <option>14h00</option>
-          <option>15h00</option>
-          <option>16h00</option>
-          <option>17h00</option>
-          <option>19h00</option>
+      <div class="cform-group">
+        <label for="leadInterest">Interesse</label>
+        <select id="leadInterest" name="interest" required>
+          <option value="" selected disabled>Selecione uma opção</option>
+          <option>Comprar imóvel</option>
+          <option>Vender imóvel</option>
+          <option>Alugar imóvel</option>
+          <option>Avaliação de imóvel</option>
+          <option>Consultoria</option>
         </select>
       </div>
-    </div>
-    <div class="bform-group">
-      <label>Profissional (opcional)</label>
-      <select>
-        <option>Sem preferência</option>
-        <option>Noura Khalil</option>
-        <option>Rafael Torres</option>
-        <option>Camila Souza</option>
-      </select>
-    </div>
-    <button class="bform-submit">Confirmar Agendamento</button>
+      <div class="cform-row">
+        <div class="cform-group">
+          <label for="leadType">Tipo de imóvel</label>
+          <select id="leadType" name="type" required>
+            <option value="" selected disabled>Selecione o tipo</option>
+            <option>Apartamento</option>
+            <option>Casa</option>
+            <option>Cobertura</option>
+            <option>Terreno</option>
+            <option>Comercial</option>
+          </select>
+        </div>
+        <div class="cform-group">
+          <label for="leadBudget">Faixa de valor</label>
+          <select id="leadBudget" name="budget" required>
+            <option value="" selected disabled>Selecione a faixa</option>
+            <option>Até R$ 500 mil</option>
+            <option>R$ 500 mil – R$ 1 milhão</option>
+            <option>R$ 1 – R$ 2 milhões</option>
+            <option>Acima de R$ 2 milhões</option>
+          </select>
+        </div>
+      </div>
+      <div class="cform-group">
+        <label for="leadMessage">Mensagem (opcional)</label>
+        <textarea id="leadMessage" name="message" placeholder="Conte-nos mais sobre o que procura..."></textarea>
+      </div>
+      <button class="cform-submit" type="submit">Enviar no WhatsApp</button>
+      <p class="cform-hint">Ao enviar, abriremos o WhatsApp com sua mensagem pronta.</p>
+    </form>
   </div>
 </section>
 
@@ -972,47 +319,78 @@
 <footer>
   <div class="footer-top">
     <div>
-      <p class="footer-logo">Maison Noura</p>
-      <p class="footer-tagline">Salão & Barbearia Premium em Campo Grande, MS. Arte em cada detalhe.</p>
+      <p class="footer-logo">Maison Imóveis</p>
+      <p class="footer-tagline">Imobiliária Premium em Campo Grande, MS. Realizando sonhos com exclusividade.</p>
     </div>
     <div class="footer-col">
       <h4>Navegação</h4>
       <a href="#">Início</a>
-      <a href="#">Serviços</a>
-      <a href="#">Equipe</a>
-      <a href="#">Agendamento</a>
+      <a href="#imoveis">Imóveis</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#contato">Contato</a>
     </div>
     <div class="footer-col">
       <h4>Serviços</h4>
-      <a href="#">Corte Feminino</a>
-      <a href="#">Coloração</a>
-      <a href="#">Tratamentos</a>
-      <a href="#">Barbearia</a>
+      <a href="#">Compra & Venda</a>
+      <a href="#">Locação</a>
+      <a href="#">Avaliação</a>
+      <a href="#">Consultoria</a>
     </div>
     <div class="footer-col">
       <h4>Contato</h4>
-      <a href="#">(67) 99999-0000</a>
-      <a href="#">Instagram</a>
-      <a href="#">WhatsApp</a>
-      <a href="#">Campo Grande/MS</a>
+      <a href="tel:+5567999990000">(67) 99999-0000</a>
+      <a href="mailto:contato@maisonimov.com">contato@maisonimov.com</a>
+      <a href="https://wa.me/5567999990000?text=Ol%C3%A1%21%20Quero%20atendimento%20para%20im%C3%B3veis." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Av.%20Afonso%20Pena%2C%204000%2C%20Campo%20Grande%20MS" target="_blank" rel="noopener noreferrer">Campo Grande/MS</a>
     </div>
   </div>
   <div class="footer-bottom">
-    <p class="footer-copy">© 2025 Maison Noura. Todos os direitos reservados.</p>
+    <p class="footer-copy">© 2025 Maison Imóveis. Todos os direitos reservados.</p>
     <p class="dev-badge">Desenvolvido por Dev 67 Studio</p>
   </div>
 </footer>
 
 <script>
+  // Navbar compact on scroll
   window.addEventListener('scroll', () => {
     document.getElementById('navbar').classList.toggle('compact', window.scrollY > 60);
   });
 
+  // Fade-in observer
   const fades = document.querySelectorAll('.fade-in');
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.12 });
   fades.forEach(f => obs.observe(f));
+
+  // Lead form -> WhatsApp
+  const leadForm = document.getElementById('leadForm');
+  leadForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('leadName')?.value?.trim() ?? '';
+    const whatsapp = document.getElementById('leadWhatsapp')?.value?.trim() ?? '';
+    const interest = document.getElementById('leadInterest')?.value?.trim() ?? '';
+    const type = document.getElementById('leadType')?.value?.trim() ?? '';
+    const budget = document.getElementById('leadBudget')?.value?.trim() ?? '';
+    const message = document.getElementById('leadMessage')?.value?.trim() ?? '';
+
+    const parts = [
+      `Olá! Gostaria de atendimento na Maison Imóveis.`,
+      '',
+      `Nome: ${name}`,
+      `WhatsApp: ${whatsapp}`,
+      `Interesse: ${interest}`,
+      `Tipo: ${type}`,
+      `Faixa: ${budget}`,
+      message ? '' : null,
+      message ? `Mensagem: ${message}` : null,
+    ].filter(Boolean);
+
+    const text = encodeURIComponent(parts.join('\n'));
+    const url = `https://wa.me/5567999990000?text=${text}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  });
 </script>
 </body>
 </html>
